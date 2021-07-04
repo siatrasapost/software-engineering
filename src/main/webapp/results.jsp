@@ -31,5 +31,6 @@
     <p><strong>Your final grade is : <%= request.getAttribute("grade")%> / 10 </strong></p>
     <br>
     <a href="student.jsp">Home Page</a>
+<%--    This is a test for git--%>
 </body>
 </html>
