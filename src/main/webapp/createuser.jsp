@@ -38,6 +38,11 @@
             <td><input type="text" required name="lastname" /></td>
             <br />
         </tr>
+        <tr>
+            <td>Age:</td>
+            <td><input type="number" required name="age" min="0" max="100" /></td>
+            <br />
+        </tr>
         <tr><td>
             Type of account<td><select onchange="visible()" id="typeacc" required name="typeacc">
             <option value="1" selected>Student</option>
@@ -46,7 +51,8 @@
             <td id="hiddentext" class="hiddentext" style="visibility: hidden">6ψηφιος κωδικος:</td>
             <td><input id="hiddeninput" style="visibility: hidden" type="text"   name="code" /></td>
         <td></td>
-        <td><input type="submit" onsubmit="required()" value="Create new seller!" /></td>
+
+        <td><input type="submit" onsubmit="required()" value="Create User!" /></td>
         <br/>
     </table>
 </form>
