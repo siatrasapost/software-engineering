@@ -29,5 +29,7 @@
     </div>
     <br>
     <p><strong>Your final grade is : <%= request.getAttribute("grade")%> / 10 </strong></p>
+    <br>
+    <a href="index.jsp">Home Page</a>
 </body>
 </html>
