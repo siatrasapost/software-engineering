@@ -59,6 +59,7 @@ public class InsertNewStudent extends HttpServlet {
         String lastname = request.getParameter("lastname");
         String password = request.getParameter("password");
         String typeacc = request.getParameter("typeacc");
+        int age= Integer.parseInt(request.getParameter("age"));
         Boolean temp1=false;
         if(typeacc.equals("2")) {
             String code = request.getParameter("code");
@@ -82,13 +83,14 @@ public class InsertNewStudent extends HttpServlet {
             } else {
             try {
                 Connection con = datasource.getConnection();
-                PreparedStatement st = con.prepareStatement("INSERT INTO users (username, password,firstname, lastname, typeacc) VALUES (?, ?, ?, ?,?)");
+                PreparedStatement st = con.prepareStatement("INSERT INTO users(username, password, firstname, lastname, typeacc, age) VALUES (?, ?, ?, ?, ?, ?)");
 
                 st.setString(1, username);
                 st.setString(2, Encryption.getHashMD5(password, "alevrialati"));
                 st.setString(3, firstname);
                 st.setString(4, lastname);
                 st.setString(5, typeacc);
+                st.setInt(6,age);
                 st.executeUpdate();
                 st.close();
                 con.close();
@@ -98,8 +100,8 @@ public class InsertNewStudent extends HttpServlet {
             }
         }
         out.println("<script type=text/javascript>");
-        out.println("alert(\"Seller successfully created\");");
-        out.println("location.replace(\"student.jsp\")");
+        out.println("alert(\"User successfully created\");");
+        out.println("location.replace(\"index.jsp\")");
         out.println("</script>");
         out.println("</body>");
         out.println("</html>");
