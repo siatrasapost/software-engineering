@@ -3,7 +3,7 @@ package com.example.BasicClasses;
 public class teacher extends user {
 
     public teacher(){}
-
+    //LALALALALLAAL
     protected String getStatement(String choice){
         switch (choice){
             case "create_exercise":
@@ -14,8 +14,6 @@ public class teacher extends user {
                 return "";
 
                 //Testing_Github
-                //Working in Siatras gtxs
-                //Axilleas COMMIT
         }
     }
 
