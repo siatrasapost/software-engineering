@@ -136,6 +136,7 @@ public class test extends HttpServlet {
             ps.setInt(3, Integer.parseInt(request.getParameter("id_test")));
             ps.executeUpdate();
             ps.close();
+            con.close();
 
             request.setAttribute("user_choices", useranswer);
             request.setAttribute("right_ones", ans);
