@@ -2,7 +2,7 @@ package com.example.BasicClasses;
 
 public class teacher extends user {
 
-    public teacher(){};
+    public teacher(){}
 
     protected String getStatement(String choice){
         switch (choice){
@@ -14,6 +14,7 @@ public class teacher extends user {
                 return "";
 
                 //Testing_Github
+                //Working in Siatras
         }
     }
 
