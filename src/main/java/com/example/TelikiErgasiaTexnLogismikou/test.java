@@ -123,7 +123,7 @@ public class test extends HttpServlet {
             }
         }
 
-        student st1 = ((student)MyServlet.session.getAttribute("usr_obj"));
+        student st1 = ((student)request.getSession(false).getAttribute("usr_obj"));
         double rights = quest.size()-wrongs;
         double grade = Math.round( ( ( rights / (double) quest.size()) / 0.1 ) * 100.0 ) / 100.0;
 
