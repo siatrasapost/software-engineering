@@ -7,6 +7,7 @@ public class student extends user{
     }
 
     public String getStatement(String choice){
+        //Switch
         switch (choice){
             case "solve_test":
                 return "SELECT * FROM questions";

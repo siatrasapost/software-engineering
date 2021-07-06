@@ -36,13 +36,28 @@ public class MyServlet extends HttpServlet {
     }
     protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         int j=0;
-        String GetUsername = request.getParameter("username");
-        String GetPassword = request.getParameter("password");
-        String password1 = Encryption.getHashMD5(GetPassword,"alevrialati");
+        String GetUsername = "";
+        String GetPassword = "";
+        String password1 = "";
+
+        //Session
+        //(NOT WORKING PROPERLY, IT HAS TO INVALIDATE SESSION RIGHT, SO NO SENSITIVE INFO CAN BE ACCESSED AFTER LOGOUT!!!)
         session = request.getSession(true);
-
-        session.setAttribute("GetUsername", GetUsername);
-
+        synchronized (session){
+            String online = (String) session.getAttribute("online");
+            if (online == null){
+                session.setAttribute("online", "true");
+                GetUsername = request.getParameter("username");
+                GetPassword = request.getParameter("password");
+                password1 = Encryption.getHashMD5(GetPassword,"alevrialati");
+            }
+            else {
+                GetUsername = ((student)session.getAttribute("usr_obj")).getUsername();
+                GetPassword = ((student)session.getAttribute("usr_obj")).getPassword();
+                password1 = Encryption.getHashMD5(GetPassword,"alevrialati");
+                System.out.println(GetUsername+ " " + GetPassword);
+            }
+        }
 
         PrintWriter out = response.getWriter();
         try {
@@ -51,12 +66,14 @@ public class MyServlet extends HttpServlet {
 
             ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE username='"+GetUsername+"' AND password='"+password1+"'" );
 
-            String username="";
+            String name="";
+            String surname="";
             String acctype="";
 
             while(rs.next()) {
                 j++;
-                username = rs.getString("username");
+                name = rs.getString("firstname");
+                surname = rs.getString("lastname");
                 acctype = rs.getString("typeacc");
                 session.setAttribute("acctype",acctype);
             }
@@ -81,14 +98,15 @@ public class MyServlet extends HttpServlet {
             if(acctype.equals("1")) {
                 //response.sendRedirect("student.jsp");
                 user1 = new student();
-                user1.login(username, "student");
+                user1.login(GetUsername, GetPassword, name, surname, "student");
+                user1.setUniqueID(session.getId());
 
                 session.setAttribute("usr_obj", user1);
 
                 //response.sendRedirect("student.jsp");
 
                 PreparedStatement ps = con.prepareStatement(user1.getStatement("get_tests"));
-                ps.setString(1, username);
+                ps.setString(1, GetUsername);
                 ResultSet rs1 = ps.executeQuery();
 
                 List<Integer> test_id = new ArrayList<>();
@@ -126,5 +144,12 @@ public class MyServlet extends HttpServlet {
         } catch(Exception e) {
             out.println("Database connection problem\n" + e.toString());
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getSession(false).invalidate();
+
+        resp.sendRedirect("index.jsp");
     }
 }

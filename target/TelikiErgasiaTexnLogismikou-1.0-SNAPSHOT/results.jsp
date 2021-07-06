@@ -29,5 +29,9 @@
     </div>
     <br>
     <p><strong>Your final grade is : <%= request.getAttribute("grade")%> / 10 </strong></p>
+    <br>
+    <form method="post" action="MyServlet">
+        <input type="submit" value="Home">
+    </form>
 </body>
 </html>
