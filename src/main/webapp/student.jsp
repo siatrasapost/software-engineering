@@ -46,5 +46,7 @@
     <br>
     <input type="submit" value="Start test">
 </form>
+<br>
+<a href="MyServlet">Log Out</a>
 </body>
 </html>
