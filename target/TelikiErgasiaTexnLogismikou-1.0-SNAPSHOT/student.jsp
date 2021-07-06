@@ -13,6 +13,21 @@
     <title>STUDENT</title>
 </head>
 <body>
+<%
+    response.setHeader("Cache-Control", "no-cache");
+    response.setHeader("Cache-Control", "no-store");
+    response.setDateHeader("Expires", 0);
+    response.setHeader("Pragma", "no-cache");
+    String userName = ((student) session.getAttribute("usr_obj")).getUsername();
+    String acctype = (String) session.getAttribute("acctype");
+    if (null == userName || !acctype.equals("1")) {
+        out.println("<script type=text/javascript>");
+        out.println("alert(\"Please login to continue!\");");
+        out.println("location.replace(\"index.jsp\")");
+        out.println("</script>");
+        System.out.println(userName+acctype);
+    }
+%>
 <h1>Welcome, <%= ((student) session.getAttribute("usr_obj")).getUsername() %></h1>
 <h4>Please select one of the tests your teacher has assigned to you, in order to solve it!</h4>
 <form action="test">
@@ -46,5 +61,7 @@
     <br>
     <input type="submit" value="Start test">
 </form>
+<br>
+<a href="Logout">Log Out</a>
 </body>
 </html>

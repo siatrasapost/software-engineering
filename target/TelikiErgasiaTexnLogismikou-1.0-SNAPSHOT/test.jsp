@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.example.BasicClasses.student" %>
 <%--
   Created by IntelliJ IDEA.
   User: siatr
@@ -13,17 +14,21 @@
     <meta charset="UTF-8">
     <title>Test</title>
 </head>
-<body>
-    <%
-        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-
-        //Directs caches not to store the page under any circumstance
-        response.setDateHeader("Expires", 0);
-
-        //Causes the proxy cache to see the page as "stale"
-        response.setHeader("Pragma", "no-cache");
-
-    %>
+<%
+    response.setHeader("Cache-Control", "no-cache");
+    response.setHeader("Cache-Control", "no-store");
+    response.setDateHeader("Expires", 0);
+    response.setHeader("Pragma", "no-cache");
+    String userName = ((student) session.getAttribute("usr_obj")).getUsername();
+    String acctype = (String) session.getAttribute("acctype");
+    if (null == userName || !acctype.equals("1")) {
+        out.println("<script type=text/javascript>");
+        out.println("alert(\"Please login to continue!\");");
+        out.println("location.replace(\"index.jsp\")");
+        out.println("</script>");
+        System.out.println(userName+acctype);
+    }
+%>
     <h1>Test</h1>
     <form method="post" action="test">
         <%
@@ -45,5 +50,6 @@
         <input type="hidden" name="id_test" id="id_test" value="<%= request.getAttribute("test_id")%>">
         <input type="submit" value="Submit Answers">
     </form>
+    <a href="Logout">Log Out</a>
 </body>
 </html>

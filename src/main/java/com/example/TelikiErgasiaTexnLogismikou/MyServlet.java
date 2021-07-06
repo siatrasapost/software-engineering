@@ -36,10 +36,28 @@ public class MyServlet extends HttpServlet {
     }
     protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         int j=0;
+        PrintWriter out = response.getWriter();
+
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<style>");
+        out.println("<body {background-color: #e6e6e6;}>");
+        out.println("</style>");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Cache-Control", "no-store");
+        response.setDateHeader("Expires", 0);
+        response.setHeader("Pragma", "no-cache");
+        out.println("</body>");
+        out.println("</html>");
+        if(request.getSession(false)==null){
+            System.out.println("TESTING TESTING");
+        }
         String GetUsername = "";
         String GetPassword = "";
         String password1 = "";
-
         //Session
         //(NOT WORKING PROPERLY, IT HAS TO INVALIDATE SESSION RIGHT, SO NO SENSITIVE INFO CAN BE ACCESSED AFTER LOGOUT!!!)
         session = request.getSession(true);
@@ -50,16 +68,19 @@ public class MyServlet extends HttpServlet {
                 GetPassword = request.getParameter("password");
                 password1 = Encryption.getHashMD5(GetPassword,"alevrialati");
                 System.out.println(session.getAttribute("online"));
+                System.out.println("online111");
             }
             else {
                 GetUsername = ((student)session.getAttribute("usr_obj")).getUsername();
                 GetPassword = ((student)session.getAttribute("usr_obj")).getPassword();
                 password1 = Encryption.getHashMD5(GetPassword,"alevrialati");
                 System.out.println(GetUsername+ " " + GetPassword);
+                System.out.println("lalalalal");
+
+                System.out.println(((student)session.getAttribute("usr_obj")).getUsername());
             }
         }
 
-        PrintWriter out = response.getWriter();
         try {
             Connection con = datasource.getConnection();
             Statement stmt = con.createStatement();

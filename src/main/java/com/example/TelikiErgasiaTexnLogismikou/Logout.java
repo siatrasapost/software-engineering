@@ -10,6 +10,7 @@ public class Logout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+        session.removeAttribute("usr_obj");
         response.setHeader("Cache-Control","no-cache");
         response.setDateHeader("Expires", 0);
         response.setHeader("Pragma","no-cache");
