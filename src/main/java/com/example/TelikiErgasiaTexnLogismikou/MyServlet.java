@@ -44,12 +44,12 @@ public class MyServlet extends HttpServlet {
         //(NOT WORKING PROPERLY, IT HAS TO INVALIDATE SESSION RIGHT, SO NO SENSITIVE INFO CAN BE ACCESSED AFTER LOGOUT!!!)
         session = request.getSession(true);
         synchronized (session){
-            String online = (String) session.getAttribute("online");
-            if (online == null){
+            if (session.getAttribute("online") == null){
                 session.setAttribute("online", "true");
                 GetUsername = request.getParameter("username");
                 GetPassword = request.getParameter("password");
                 password1 = Encryption.getHashMD5(GetPassword,"alevrialati");
+                System.out.println(session.getAttribute("online"));
             }
             else {
                 GetUsername = ((student)session.getAttribute("usr_obj")).getUsername();
