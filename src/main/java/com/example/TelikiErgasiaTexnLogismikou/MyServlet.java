@@ -20,93 +20,36 @@ import java.util.List;
 @WebServlet(name = "MyServlet",urlPatterns = {"/MyServlet"})
 public class MyServlet extends HttpServlet {
     private DataSource datasource = null;
-    int i=0;
-    public static HttpSession session;
-    private student user1;
 
     public void init() throws ServletException{
         try {
-
             InitialContext ctx = new InitialContext();
             datasource = (DataSource)ctx.lookup("java:comp/env/jdbc/LiveDataSource");
         } catch(Exception e) {
             throw new ServletException(e.toString());
         }
-
     }
+
+    @Override
     protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         int j=0;
-        String GetUsername = "";
-        String GetPassword = "";
-        String password1 = "";
-
-        //Session
-        //(NOT WORKING PROPERLY, IT HAS TO INVALIDATE SESSION RIGHT, SO NO SENSITIVE INFO CAN BE ACCESSED AFTER LOGOUT!!!)
-        session = request.getSession(true);
-        synchronized (session){
-            if (session.getAttribute("online") == null){
-                session.setAttribute("online", "true");
-                GetUsername = request.getParameter("username");
-                GetPassword = request.getParameter("password");
-                password1 = Encryption.getHashMD5(GetPassword,"alevrialati");
-                System.out.println(session.getAttribute("online"));
-            }
-            else {
-                GetUsername = ((student)session.getAttribute("usr_obj")).getUsername();
-                GetPassword = ((student)session.getAttribute("usr_obj")).getPassword();
-                password1 = Encryption.getHashMD5(GetPassword,"alevrialati");
-                System.out.println(GetUsername+ " " + GetPassword);
-            }
-        }
-
         PrintWriter out = response.getWriter();
+
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<style>");
+        out.println("<body {background-color: #e6e6e6;}>");
+        out.println("</style>");
+
         try {
             Connection con = datasource.getConnection();
-            Statement stmt = con.createStatement();
 
-            ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE username='"+GetUsername+"' AND password='"+password1+"'" );
-
-            String name="";
-            String surname="";
-            String acctype="";
-
-            while(rs.next()) {
-                j++;
-                name = rs.getString("firstname");
-                surname = rs.getString("lastname");
-                acctype = rs.getString("typeacc");
-                session.setAttribute("acctype",acctype);
-            }
-            rs.close();
-            //con.close();
-
-            if(j==0){response.setContentType("text/html; charset=UTF-8");
-                response.setCharacterEncoding("UTF-8");
-                request.setCharacterEncoding("UTF-8");
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<style>");
-                out.println("<body {background-color: #e6e6e6;}>");
-                out.println("</style>");
-                out.println("<script type=text/javascript>");
-                out.println("alert(\"Incorrect username or surname\");");
-                out.println("location.replace(\"index.jsp\")");
-                out.println("</script>");
-                out.println("</body>");
-                out.println("</html>");}
-
-            if(acctype.equals("1")) {
-                //response.sendRedirect("student.jsp");
-                user1 = new student();
-                user1.login(GetUsername, GetPassword, name, surname, "student");
-                user1.setUniqueID(session.getId());
-
-                session.setAttribute("usr_obj", user1);
-
-                //response.sendRedirect("student.jsp");
-
-                PreparedStatement ps = con.prepareStatement(user1.getStatement("get_tests"));
-                ps.setString(1, GetUsername);
+            if(request.getSession(false).getAttribute("acctype").equals("1")) {
+                PreparedStatement ps = con.prepareStatement(((student)request.getSession(false).getAttribute("usr_obj")).getStatement("get_tests"));
+                ps.setString(1, ((student)request.getSession(false).getAttribute("usr_obj")).getUsername());
                 ResultSet rs1 = ps.executeQuery();
 
                 List<Integer> test_id = new ArrayList<>();
@@ -135,7 +78,17 @@ public class MyServlet extends HttpServlet {
                 request.setAttribute("difficulty", difficulty);
                 request.setAttribute("test_id", test_id);
 
-                request.getRequestDispatcher("/student.jsp").forward(request, response);
+                response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+                response.addHeader("Cache-Control", "post-check=0, pre-check=0");
+                //Directs caches not to store the page under any circumstance
+                response.setDateHeader("Expires", 0);
+                //Causes the proxy cache to see the page as "stale"
+                response.setHeader("Pragma", "no-cache");
+//                if ((String)request.getSession(false).getAttribute("online")==null || !((String)request.getSession(false).getAttribute("acctype")).equals("1")){
+//                    response.sendRedirect("index.jsp");
+//                }
+//                else
+                request.getRequestDispatcher("/student.jsp").include(request, response);
 
             }
             else
@@ -144,12 +97,11 @@ public class MyServlet extends HttpServlet {
         } catch(Exception e) {
             out.println("Database connection problem\n" + e.toString());
         }
+        out.println("</body>");
+        out.println("</html>");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession(false).invalidate();
-
-        resp.sendRedirect("index.jsp");
     }
 }

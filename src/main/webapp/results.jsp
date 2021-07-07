@@ -13,6 +13,20 @@
     <meta charset="UTF-8">
 </head>
 <body>
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+
+    //Directs caches not to store the page under any circumstance
+    response.setDateHeader("Expires", 0);
+
+    //Causes the proxy cache to see the page as "stale"
+    response.setHeader("Pragma", "no-cache");
+
+    if ((String)request.getSession(false).getAttribute("online")==null || !((String)request.getSession(false).getAttribute("acctype")).equals("1")){
+        response.sendRedirect("index.jsp");
+    }
+
+%>
     <h1>Results</h1>
     <h4><%= ((student)session.getAttribute("usr_obj")).getUsername()%>, here is your final results and your grade:</h4>
     <br>

@@ -150,9 +150,6 @@ public class test extends HttpServlet {
             out.println("Database connection problem\n");
             out.println(e.toString());
         }
-
-        out.println("\t\t<input type=\"submit\" value=\"test ende1d\" />\t");
-
         out.println("</body>");
         out.println("</html>");
     }

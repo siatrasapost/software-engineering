@@ -1,6 +1,7 @@
 <%@ page import="com.example.BasicClasses.student" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.sql.Timestamp" %><%--
+<%@ page import="java.sql.Timestamp" %>
+<%--
   Created by IntelliJ IDEA.
   User: vagel
   Date: 22/6/2021
@@ -8,35 +9,31 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page session="false" %>
 <html>
 <head>
     <title>STUDENT</title>
 </head>
 <body>
 <%
-    response.setHeader("Cache-Control", "no-cache");
-    response.setHeader("Cache-Control", "no-store");
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+
+    response.addHeader("Cache-Control", "post-check=0, pre-check=0");
+
+    //Directs caches not to store the page under any circumstance
     response.setDateHeader("Expires", 0);
+
+    //Causes the proxy cache to see the page as "stale"
     response.setHeader("Pragma", "no-cache");
-    String userName = ((student) session.getAttribute("usr_obj")).getUsername();
-    String acctype = (String) session.getAttribute("acctype");
-    if (null == userName || !acctype.equals("1")) {
-        out.println("<script type=text/javascript>");
-        out.println("alert(\"Please login to continue!\");");
-        out.println("location.replace(\"index.jsp\")");
-        out.println("</script>");
-        System.out.println(userName+acctype);
+
+    if ((String)request.getSession(false).getAttribute("online")==null || !((String)request.getSession(false).getAttribute("acctype")).equals("1")){
+        response.sendRedirect("index.jsp");
     }
+
 %>
-<h1>Welcome, <%= ((student) session.getAttribute("usr_obj")).getUsername() %></h1>
+<h1>Welcome, <%= ((student) request.getSession(false).getAttribute("usr_obj")).getUsername() %></h1>
 <h4>Please select one of the tests your teacher has assigned to you, in order to solve it!</h4>
 <form action="test">
-<%--    <input id="regular" name="tests" type="radio" value="regular">--%>
-<%--    <label for="regular">Regular Test</label>--%>
-<%--    <br>--%>
-<%--    <input id="random" name="tests" type="radio" value="random">--%>
-<%--    <label for="random">Random Test</label>--%>
-<%--    <br>--%>
     <table>
         <tr>
             <th>Teacher</th>
@@ -62,6 +59,6 @@
     <input type="submit" value="Start test">
 </form>
 <br>
-<a href="Logout">Log Out</a>
+<a href="logout.jsp">Log Out</a>
 </body>
 </html>

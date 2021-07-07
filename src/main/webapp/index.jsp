@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page session="false" %>
 <html>
 <head>
     <style>
@@ -7,7 +8,19 @@
     <title>Connect</title>
 </head>
 <body>
-<form method="post" action="MyServlet">
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+
+    response.addHeader("Cache-Control", "post-check=0, pre-check=0");
+
+    //Directs caches not to store the page under any circumstance
+    response.setDateHeader("Expires", 0);
+
+    //Causes the proxy cache to see the page as "stale"
+    response.setHeader("Pragma", "no-cache");
+
+%>
+<form method="post" action="AccountHandling">
     <table align="center"style="margin: 0px auto;">
         <br>
         <br>

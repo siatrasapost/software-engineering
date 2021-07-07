@@ -23,6 +23,10 @@
         //Causes the proxy cache to see the page as "stale"
         response.setHeader("Pragma", "no-cache");
 
+        if ((String)request.getSession(false).getAttribute("online")==null || !((String)request.getSession(false).getAttribute("acctype")).equals("1")){
+            response.sendRedirect("index.jsp");
+        }
+
     %>
     <h1>Test</h1>
     <form method="post" action="test">
