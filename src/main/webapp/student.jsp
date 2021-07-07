@@ -13,6 +13,11 @@
 <html>
 <head>
     <title>STUDENT</title>
+    <style>
+        table, td{
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
 <%
@@ -55,8 +60,9 @@
             }
         %>
     </table>
+    <%= (int)request.getAttribute("assigned_num")==0? "<br><u>NO TESTS ASSIGNED</u>" : "" %>
     <br>
-    <input type="submit" value="Start test">
+    <input type="submit" value="Start test" <%= (int)request.getAttribute("assigned_num")==0? "hidden" : ""%>>
 </form>
 <br>
 <a href="logout.jsp">Log Out</a>
