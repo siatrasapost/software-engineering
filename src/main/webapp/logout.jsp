@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Logout</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 <%
@@ -27,7 +28,8 @@
     }
 
 %>
-    <p>Are you sure you want to logout?</p>
+    <h1>Logout</h1>
+    <h4>Are you sure you want to logout?</h4>
     <form method="get" action="AccountHandling">
         <input type="submit" value="Yes">
     </form>

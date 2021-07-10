@@ -28,3 +28,18 @@ table {
     font-family: sans-serif;
     font-size: .8rem;
 }
+h1{
+    background-color: darkred;
+    color: white;
+    text-align: center;
+    margin: 50px 25%;
+    padding: 10px 0px;
+}
+body {
+    background-color: #e6e6e6;
+    text-align: center;
+}
+.center{
+    margin-left: auto;
+    margin-right: auto;
+}

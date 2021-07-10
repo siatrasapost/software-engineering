@@ -13,12 +13,7 @@
 <html>
 <head>
     <title>STUDENT</title>
-<%--    <style>--%>
-<%--        table, td{--%>
-<%--            border: 1px solid black;--%>
-<%--        }--%>
-<%--    </style>--%>
-    <link rel="stylesheet" type="text/css" href="student.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 <%
@@ -40,7 +35,7 @@
 <h1>Welcome, <%= ((student) request.getSession(false).getAttribute("usr_obj")).getUsername() %></h1>
 <h4>Please select one of the tests your teacher has assigned to you, in order to solve it!</h4>
 <form action="test">
-    <table>
+    <table class="center">
         <tr>
             <th scope="col">Teacher</th>
             <th scope="col">Questions</th>

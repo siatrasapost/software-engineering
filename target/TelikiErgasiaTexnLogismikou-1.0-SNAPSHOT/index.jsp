@@ -2,10 +2,8 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <style>
-        body {background-color: #e6e6e6;}
-    </style>
     <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 <%
@@ -20,13 +18,9 @@
     response.setHeader("Pragma", "no-cache");
 
 %>
+<h1 style="text-align: center;">Login</h1>
 <form method="post" action="AccountHandling">
     <table align="center"style="margin: 0px auto;">
-        <br>
-        <br>
-        <br>
-        <br>
-        <h1 style="text-align: center;">Login</h1>
         <tr>
             <td><b>Username:</b></td>
             <td><input type="text" name="username" /></td>
