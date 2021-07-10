@@ -13,11 +13,12 @@
 <html>
 <head>
     <title>STUDENT</title>
-    <style>
-        table, td{
-            border: 1px solid black;
-        }
-    </style>
+<%--    <style>--%>
+<%--        table, td{--%>
+<%--            border: 1px solid black;--%>
+<%--        }--%>
+<%--    </style>--%>
+    <link rel="stylesheet" type="text/css" href="student.css">
 </head>
 <body>
 <%
@@ -41,11 +42,11 @@
 <form action="test">
     <table>
         <tr>
-            <th>Teacher</th>
-            <th>Questions</th>
-            <th>Difficulty</th>
-            <th>Date Assigned</th>
-            <th>SELECT</th>
+            <th scope="col">Teacher</th>
+            <th scope="col">Questions</th>
+            <th scope="col">Difficulty</th>
+            <th scope="col">Date Assigned</th>
+            <th scope="col">SELECT</th>
         </tr>
         <%
             for (int i=0; i<(int) request.getAttribute("assigned_num"); i++){
@@ -54,13 +55,14 @@
                 out.println("<td>"+((List<Integer>)request.getAttribute("questions_num")).get(i)+"</td>");
                 out.println("<td>"+((List<Integer>)request.getAttribute("difficulty")).get(i)+"</td>");
                 out.println("<td>"+((List<Timestamp>)request.getAttribute("dates")).get(i)+"</td>");
-                out.println("<td><input type=\"radio\" id=\"radio"+i+"\" name=\"selected\" value="+((List<Integer>)request.getAttribute("test_id")).get(i)+" required></td>");
+                out.println("<th scope=\"row\"><input type=\"radio\" id=\"radio"+i+"\" name=\"selected\" value="+((List<Integer>)request.getAttribute("test_id")).get(i)+" required></td>");
                 //out.println("<td><input type=\"hidden\" id=\"test_id"+i+"\" name=\"test_id\" value="+((List<Integer>)request.getAttribute("test_id")).get(i)+" ></td>");
                 out.println("</tr>");
             }
+
+            out.println((int)request.getAttribute("assigned_num")==0? "<tr><td colspan=\"5\">NO TESTS ASSIGNED</td></tr>" : "");
         %>
     </table>
-    <%= (int)request.getAttribute("assigned_num")==0? "<br><u>NO TESTS ASSIGNED</u>" : "" %>
     <br>
     <input type="submit" value="Start test" <%= (int)request.getAttribute("assigned_num")==0? "hidden" : ""%>>
 </form>

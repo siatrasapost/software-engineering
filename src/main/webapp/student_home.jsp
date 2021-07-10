@@ -32,6 +32,8 @@
     <form method="post" action="MyServlet">
         <input type="submit" value="Assigned Tests">
     </form>
+    <input type="button" value="Previous Tests">
+    <br>
     <a href="logout.jsp">Logout</a>
 </body>
 </html>

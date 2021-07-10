@@ -5,7 +5,7 @@
     <style>
         body {background-color: #e6e6e6;}
     </style>
-    <title>Connect</title>
+    <title>Login</title>
 </head>
 <body>
 <%
@@ -35,11 +35,19 @@
             <td><b>Password:</b></td>
             <td><input type="password" name="password" /></td>
         </tr>
-        <td></td>
-        <td><input type="submit" value="SignIn" /></td>
-        </tr>
-        <a href="createuser.jsp"> Εισαγωγη νεου χρηστη</a>
     </table>
+    <br>
+    <div style="text-align: center">
+        <input type="submit" value="SignIn">
+    </div>
 </form>
+<br>
+<div>
+    <table align="center">
+        <tr>
+            <td colspan="2" style="text-align:center"><a href="createuser.jsp">Εισαγωγη νεου χρηστη</a></td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>
