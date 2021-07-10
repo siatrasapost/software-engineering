@@ -35,8 +35,8 @@
             for (int i=0;i<((ArrayList)request.getAttribute("questions")).size();i++){
                 out.println((i+1)+". <ins>"+((ArrayList)request.getAttribute("questions")).get(i)+"</ins>");
                 out.println("<br>");
-                out.println("Your answer was: <b>"+((ArrayList)request.getAttribute("user_choices")).get(i)
-                        +"</b> <br>The right answer was: <b>"+((ArrayList)request.getAttribute("right_ones")).get(i)+"</b>");
+                out.println("Your answer was: <span style=\"color:blue\">"+((ArrayList)request.getAttribute("user_choices")).get(i)
+                        +"</span> <br>The right answer was: <b>"+((ArrayList)request.getAttribute("right_ones")).get(i)+"</b>");
                 out.println("<br><br>");
             }
         %>
