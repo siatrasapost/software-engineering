@@ -1,6 +1,7 @@
 package com.example.TelikiErgasiaTexnLogismikou;
 
 import com.example.BasicClasses.student;
+import com.example.BasicClasses.teacher;
 import com.example.BasicClasses.user;
 
 import javax.naming.InitialContext;
@@ -69,7 +70,6 @@ public class MyServlet extends HttpServlet {
                 }
 
                 rs1.close();
-                con.close();
 
                 request.setAttribute("assigned_num", assigned_num);
                 request.setAttribute("teachers", teacher_arr);
@@ -84,15 +84,51 @@ public class MyServlet extends HttpServlet {
                 response.setDateHeader("Expires", 0);
                 //Causes the proxy cache to see the page as "stale"
                 response.setHeader("Pragma", "no-cache");
-//                if ((String)request.getSession(false).getAttribute("online")==null || !((String)request.getSession(false).getAttribute("acctype")).equals("1")){
-//                    response.sendRedirect("index.jsp");
-//                }
-//                else
+
                 request.getRequestDispatcher("/student.jsp").include(request, response);
 
             }
-            else
-                response.sendRedirect("teacher.jsp");
+            else {
+                PreparedStatement ps = con.prepareStatement(((teacher) request.getSession(false).getAttribute("usr_obj")).getStatement("get_tests"));
+                ps.setString(1, ((teacher) request.getSession(false).getAttribute("usr_obj")).getUsername());
+                ResultSet rs2 = ps.executeQuery();
+
+                List<Integer> test_id = new ArrayList<>();
+                List<String> teacher_arr = new ArrayList<>();
+                List<Integer> questions_num = new ArrayList<>();
+                int assigned_num = 0;
+                List<Integer> difficulty = new ArrayList<>();
+                List<Timestamp> timestamps = new ArrayList<>();
+
+                while (rs2.next()) {
+                    test_id.add(rs2.getInt("test_id"));
+                    teacher_arr.add(rs2.getString("teachersname"));
+                    timestamps.add(rs2.getTimestamp("date"));
+                    difficulty.add(rs2.getInt("difficulty"));
+                    questions_num.add(rs2.getString("questions").split(",").length);
+                    assigned_num++;
+                }
+
+                rs2.close();
+
+                request.setAttribute("assigned_num", assigned_num);
+                request.setAttribute("teachers", teacher_arr);
+                request.setAttribute("dates", timestamps);
+                request.setAttribute("questions_num", questions_num);
+                request.setAttribute("difficulty", difficulty);
+                request.setAttribute("test_id", test_id);
+
+                response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+                response.addHeader("Cache-Control", "post-check=0, pre-check=0");
+                //Directs caches not to store the page under any circumstance
+                response.setDateHeader("Expires", 0);
+                //Causes the proxy cache to see the page as "stale"
+                response.setHeader("Pragma", "no-cache");
+
+                request.getRequestDispatcher("/teacher.jsp").include(request, response);
+            }
+
+            con.close();
 
         } catch (SQLException e){
             out.println("Database connection problem\n");

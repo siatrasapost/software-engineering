@@ -1,6 +1,8 @@
 package com.example.TelikiErgasiaTexnLogismikou;
 
 import com.example.BasicClasses.student;
+import com.example.BasicClasses.teacher;
+import com.example.BasicClasses.user;
 
 import javax.naming.InitialContext;
 import javax.servlet.*;
@@ -18,7 +20,7 @@ import java.sql.Statement;
 public class AccountHandling extends HttpServlet {
     private DataSource datasource = null;
     public static HttpSession session;
-    private student user1;
+    private user user1;
     String GetUsername = null;
     String GetPassword = null;
     String password1 = null;
@@ -124,7 +126,20 @@ public class AccountHandling extends HttpServlet {
                 request.getRequestDispatcher("/blank.html").include(request, response);
             }
             else{
-                request.getRequestDispatcher("/teacher.jsp").forward(request, response);
+                user1 = new teacher();
+                user1.login(GetUsername, password1, name, surname, "teacher");
+                //user1.setUniqueID(session.getId());
+
+                session.setAttribute("usr_obj", user1);
+
+                response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+                response.addHeader("Cache-Control", "post-check=0, pre-check=0");
+                //Directs caches not to store the page under any circumstance
+                response.setDateHeader("Expires", 0);
+                //Causes the proxy cache to see the page as "stale"
+                response.setHeader("Pragma", "no-cache");
+
+                request.getRequestDispatcher("/blank_t.html").include(request, response);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
