@@ -33,6 +33,12 @@
 <form method="post" action="MyServlet">
   <input type="submit" value="Assigned Tests">
 </form>
+<form>
+    <input type="submit" value="Create new exercises">
+</form>
+<form>
+    <input type="submit" value="Assign tests to students">
+</form>
 <br>
 <a href="logout.jsp">Logout</a>
 </body>
