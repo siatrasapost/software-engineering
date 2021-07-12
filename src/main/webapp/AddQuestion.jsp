@@ -43,18 +43,21 @@
     Multiple choice <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="multichoice"> Fill the blank <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="filltheblank">True or false <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="trueorfalse"><br>
     <div id="mc" style="display:none">
         <b>question:</b>
-        Question<input type="text"  name="question"/>
-        Choice 1<input type="text" name="choice1"/>
-        Choice 2 correct<input type="text"  name="choice_correct" style="border: 2px solid green;"/>
-        Choice 3    <input type="text"  name="choice2" />
+        Question<input type="text" id="idname1"  name="question1"/>
+        Choice 1<input type="text" id="idname2" name="choice1"/>
+        Choice 2 correct<input type="text" id="idname3" name="choice_correct" style="border: 2px solid green;"/>
+        Choice 3    <input type="text" id="idname4" name="choice2" />
     </div>
     <div id="ftb" style="display: none">
-        Fill the blank<input type="text" id="fillblank" name="filltheblank">
+        Question : Athens is the ________ of greece.        Anwser: capital
+        <br>
+        Question<input type="text" id="idname5" name="question2">
+        Anwser<input type="text" id="idname6" name="anwser">
     </div>
     <div id="trf" style="display:none">
-        question<input type="text name=trueorfalse">
-        True<input type="radio" id="True"    name="first_item"/>
-        False<input type="radio" id="False"  name="first_item" />
+        question<input id="idname7" type="text"  name="question3">
+        True<input type="radio" id="True" value="true"   name="first_item"/>
+        False<input type="radio" id="False" value="false" name="first_item" />
     </div>
     <br>
     <input type="submit" value="Assign new question">
@@ -67,18 +70,42 @@
             document.getElementById('ftb').style.display = 'none';
             document.getElementById('trf').style.display = 'none';
             document.getElementById('myField').value ="multichoice";
+            document.getElementById("idname1").required = true;
+            document.getElementById("idname2").required = true;
+            document.getElementById("idname3").required = true;
+            document.getElementById("idname4").required = true;
+            document.getElementById("idname5").required = false;
+            document.getElementById("idname6").required = false;
+            document.getElementById('False').required = false;
+            document.getElementById('idname7').required = false;
         }
         else if(document.getElementById('filltheblank').checked) {
             document.getElementById('mc').style.display = 'none';
             document.getElementById('ftb').style.display = 'block';
             document.getElementById('trf').style.display = 'none';
             document.getElementById('myField').value ='filltheblank';
+            document.getElementById("idname1").required = false;
+            document.getElementById("idname2").required = false;
+            document.getElementById("idname3").required = false;
+            document.getElementById("idname4").required = false;
+            document.getElementById("idname5").required = true;
+            document.getElementById("idname6").required = true;
+            document.getElementById('False').required = false;
+            document.getElementById('idname7').required = false;
         }
         else if(document.getElementById('trueorfalse').checked){
             document.getElementById('mc').style.display = 'none';
             document.getElementById('ftb').style.display = 'none';
             document.getElementById('trf').style.display = 'block';
             document.getElementById('myField').value ='trueorfalse';
+            document.getElementById('False').required = true;
+            document.getElementById("idname1").required = false;
+            document.getElementById("idname2").required = false;
+            document.getElementById("idname3").required = false;
+            document.getElementById("idname4").required = false;
+            document.getElementById("idname5").required = false;
+            document.getElementById("idname6").required = false;
+            document.getElementById('idname7').required = true;
         }
     }
 
