@@ -30,11 +30,16 @@
 %>
 <h1>  <%= ((teacher) request.getSession(false).getAttribute("usr_obj")).getUsername() %>, assign new questions</h1>
 <form method="post" action="AddQuestions">
-
+    <input type="hidden" name="myField" id="myField" />
         <br>
         <br>
         <br>
         <br>
+    Question difficulty<select name="questdif">
+    <option value="1" selected>1</option>
+    <option>2</option>
+    <option>3</option>
+</select><br><br></tr>
     Multiple choice <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="multichoice"> Fill the blank <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="filltheblank">True or false <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="trueorfalse"><br>
     <div id="mc" style="display:none">
         <b>question:</b>
@@ -49,7 +54,7 @@
     <div id="trf" style="display:none">
         question<input type="text name=trueorfalse">
         True<input type="radio" id="True"    name="first_item"/>
-        False<input type="radio" id="False"  name="first_item" required=""/>
+        False<input type="radio" id="False"  name="first_item" />
     </div>
     <br>
     <input type="submit" value="Assign new question">
@@ -61,16 +66,19 @@
             document.getElementById('mc').style.display = 'block';
             document.getElementById('ftb').style.display = 'none';
             document.getElementById('trf').style.display = 'none';
+            document.getElementById('myField').value ="multichoice";
         }
         else if(document.getElementById('filltheblank').checked) {
             document.getElementById('mc').style.display = 'none';
             document.getElementById('ftb').style.display = 'block';
             document.getElementById('trf').style.display = 'none';
+            document.getElementById('myField').value ='filltheblank';
         }
         else if(document.getElementById('trueorfalse').checked){
             document.getElementById('mc').style.display = 'none';
             document.getElementById('ftb').style.display = 'none';
             document.getElementById('trf').style.display = 'block';
+            document.getElementById('myField').value ='trueorfalse';
         }
     }
 

@@ -1,6 +1,7 @@
 package com.example.TelikiErgasiaTexnLogismikou;
 
 import com.example.BasicClasses.student;
+import com.example.BasicClasses.teacher;
 
 import javax.naming.InitialContext;
 import javax.servlet.*;
@@ -45,7 +46,28 @@ public class AddQuestions extends HttpServlet {
         out.println("<style>");
         out.println("<body {background-color: #e6e6e6;}>");
         out.println("</style>");
+        try {
+            Connection con = datasource.getConnection();
+            PreparedStatement st = con.prepareStatement("INSERT INTO questions(question,answer,difficulty,teachersname,type) VALUES (?, ?, ?, ?,?)");
+            if(request.getParameter("myField").equals("multichoice")) {
+                st.setString(1, request.getParameter("question")+","+request.getParameter("choice1")+","+request.getParameter("choice_correct")+","+request.getParameter("choice2"));
+                st.setString(2, request.getParameter("choice_correct"));
+                st.setString(3, request.getParameter("questdif"));
+                st.setString(4, ((teacher) request.getSession(false).getAttribute("usr_obj")).getUsername());
+                st.setInt(5,1);
+            }
 
+            st.executeUpdate();
+            st.close();
+            con.close();
+            out.println("<script>");
+            out.println("alert('Question has been added succesfully!');");
+            out.println("location.replace('./AddQuestion.jsp');");
+            out.println("</script>");
+            j=0;
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
 
 
         out.println("</body>");
