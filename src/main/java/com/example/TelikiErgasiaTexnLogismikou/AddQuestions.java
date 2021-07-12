@@ -50,11 +50,25 @@ public class AddQuestions extends HttpServlet {
             Connection con = datasource.getConnection();
             PreparedStatement st = con.prepareStatement("INSERT INTO questions(question,answer,difficulty,teachersname,type) VALUES (?, ?, ?, ?,?)");
             if(request.getParameter("myField").equals("multichoice")) {
-                st.setString(1, request.getParameter("question")+","+request.getParameter("choice1")+","+request.getParameter("choice_correct")+","+request.getParameter("choice2"));
+                st.setString(1, request.getParameter("question1")+","+request.getParameter("choice1")+","+request.getParameter("choice_correct")+","+request.getParameter("choice2"));
                 st.setString(2, request.getParameter("choice_correct"));
                 st.setString(3, request.getParameter("questdif"));
                 st.setString(4, ((teacher) request.getSession(false).getAttribute("usr_obj")).getUsername());
                 st.setInt(5,1);
+            }
+            else if(request.getParameter("myField").equals("filltheblank")) {
+                st.setString(1, request.getParameter("question2"));
+                st.setString(2, request.getParameter("anwser"));
+                st.setString(3, request.getParameter("questdif"));
+                st.setString(4, ((teacher) request.getSession(false).getAttribute("usr_obj")).getUsername());
+                st.setInt(5,2);
+            }
+            else if(request.getParameter("myField").equals("trueorfalse")) {
+                st.setString(1, request.getParameter("question3"));
+                st.setString(2, request.getParameter("first_item"));
+                st.setString(3, request.getParameter("questdif"));
+                st.setString(4, ((teacher) request.getSession(false).getAttribute("usr_obj")).getUsername());
+                st.setInt(5,3);
             }
 
             st.executeUpdate();
