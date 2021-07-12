@@ -28,12 +28,12 @@
   }
 
 %>
-<h1>Hello Student</h1>
+<h1>Hello Teacher</h1>
 <br>
 <form method="post" action="MyServlet">
   <input type="submit" value="Assigned Tests">
 </form>
-<form>
+<form action="AssignTests.jsp">
     <input type="submit" value="Create new exercises">
 </form>
 <form>

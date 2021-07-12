@@ -31,7 +31,7 @@
 
 %>
 <h1>Welcome, <%= ((teacher) request.getSession(false).getAttribute("usr_obj")).getUsername() %></h1>
-<h4>Here you can see the tests you have assigned to your students!</h4>
+<h3>Here you can see the tests you have assigned to your students!</h3>
 <form action="">
     <table class="center">
         <tr>
