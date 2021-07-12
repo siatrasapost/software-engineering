@@ -126,6 +126,8 @@ public class MyServlet extends HttpServlet {
                 response.setHeader("Pragma", "no-cache");
 
                 request.getRequestDispatcher("/teacher.jsp").include(request, response);
+
+
             }
 
             con.close();

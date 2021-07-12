@@ -14,7 +14,7 @@ public class student extends user{
             case "submit_answers":
                 return "UPDATE test_history SET grade = ?, date = ? WHERE test_id = ?";
             case "get_tests":
-                return "SELECT * FROM test_history WHERE username=? AND grade=''";
+                return "SELECT * FROM test_history WHERE username=? AND grade='' ORDER BY date DESC";
             default:
                 return "";
         }

@@ -36,7 +36,7 @@
 <form action="AddQuestion.jsp">
     <input type="submit" value="Create new exercises">
 </form>
-<form>
+<form action="prepare_test.jsp">
     <input type="submit" value="Assign tests to students">
 </form>
 <br>

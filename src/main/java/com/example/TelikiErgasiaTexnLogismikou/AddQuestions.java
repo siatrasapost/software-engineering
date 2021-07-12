@@ -35,7 +35,6 @@ public class AddQuestions extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int j=0;
         PrintWriter out = response.getWriter();
 
         response.setContentType("text/html; charset=UTF-8");
@@ -48,23 +47,23 @@ public class AddQuestions extends HttpServlet {
         out.println("</style>");
         try {
             Connection con = datasource.getConnection();
-            PreparedStatement st = con.prepareStatement("INSERT INTO questions(question,answer,difficulty,teachersname,type) VALUES (?, ?, ?, ?,?)");
-            System.out.println(request.getParameter("myField"));
-            if(request.getParameter("myField").equals("multichoice")) {
+            PreparedStatement st = con.prepareStatement(((teacher) request.getSession(false).getAttribute("usr_obj")).getStatement("create_exercise"));
+            System.out.println(request.getParameter("yesno"));
+            if(request.getParameter("yesno").equals("multichoice")) {
                 st.setString(1, request.getParameter("question1")+","+request.getParameter("choice1")+","+request.getParameter("choice_correct")+","+request.getParameter("choice2"));
                 st.setString(2, request.getParameter("choice_correct"));
                 st.setString(3, request.getParameter("questdif"));
                 st.setString(4, ((teacher) request.getSession(false).getAttribute("usr_obj")).getUsername());
                 st.setInt(5,1);
             }
-            else if(request.getParameter("myField").equals("filltheblank")) {
+            else if(request.getParameter("yesno").equals("filltheblank")) {
                 st.setString(1, request.getParameter("question2"));
                 st.setString(2, request.getParameter("anwser"));
                 st.setString(3, request.getParameter("questdif"));
                 st.setString(4, ((teacher) request.getSession(false).getAttribute("usr_obj")).getUsername());
                 st.setInt(5,2);
             }
-            else if(request.getParameter("myField").equals("trueorfalse")) {
+            else if(request.getParameter("yesno").equals("trueorfalse")) {
                 System.out.println(request.getParameter("question3")+"  "+ request.getParameter("first_item")+"  "+request.getParameter("questdif") );
                 st.setString(1, request.getParameter("question3"));
                 st.setString(2, request.getParameter("first_item"));
@@ -80,9 +79,15 @@ public class AddQuestions extends HttpServlet {
             out.println("alert('Question has been added succesfully!');");
             out.println("location.replace('./AddQuestion.jsp');");
             out.println("</script>");
-            j=0;
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
+        } catch (SQLException e){
+            out.println("Database connection problem\n");
+            out.println(e.toString());
+        }
+        catch(Exception e) {
+            out.println("<script>");
+            out.println("alert('You have to login in order to access this page!');");
+            out.println("location.replace('./index.jsp');");
+            out.println("</script>");
         }
 
 

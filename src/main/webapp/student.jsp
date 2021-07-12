@@ -33,7 +33,7 @@
 
 %>
 <h1>Welcome, <%= ((student) request.getSession(false).getAttribute("usr_obj")).getUsername() %></h1>
-<h4>Please select one of the tests your teacher has assigned to you, in order to solve it!</h4>
+<h3>Please select one of the tests your teacher has assigned to you, in order to solve it!</h3>
 <form action="test">
     <table class="center">
         <tr>

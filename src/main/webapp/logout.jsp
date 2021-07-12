@@ -29,7 +29,7 @@
 
 %>
     <h1>Logout</h1>
-    <h4>Are you sure you want to logout?</h4>
+    <h3>Are you sure you want to logout?</h3>
     <form method="get" action="AccountHandling">
         <input type="submit" value="Yes">
     </form>

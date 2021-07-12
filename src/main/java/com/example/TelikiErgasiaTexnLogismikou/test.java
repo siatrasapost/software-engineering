@@ -89,9 +89,15 @@ public class test extends HttpServlet {
 
             out.println("\t\t<input type=\"submit\" value=\"Start test\" />\t");
         }
-        catch(Exception e) {
+        catch (SQLException e){
             out.println("Database connection problem\n");
             out.println(e.toString());
+        }
+        catch(Exception e) {
+            out.println("<script>");
+            out.println("alert('You have to login in order to access this page!');");
+            out.println("location.replace('./index.jsp');");
+            out.println("</script>");
         }
         out.println("</body>");
         out.println("</html>");
@@ -132,7 +138,6 @@ public class test extends HttpServlet {
             PreparedStatement ps = con.prepareStatement(st1.getStatement("submit_answers"));
             ps.setString(1, Double.toString(grade));
             ps.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
-            System.out.println(request.getAttribute("id_test"));
             ps.setInt(3, Integer.parseInt(request.getParameter("id_test")));
             ps.executeUpdate();
             ps.close();

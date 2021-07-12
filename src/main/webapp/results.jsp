@@ -29,7 +29,7 @@
 
 %>
     <h1>Results</h1>
-    <h4><%= ((student)session.getAttribute("usr_obj")).getUsername()%>, here is your final results and your grade:</h4>
+    <h3><%= ((student)session.getAttribute("usr_obj")).getUsername()%>, here is your final results and your grade:</h3>
     <br>
     <div>
         <%
