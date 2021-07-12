@@ -13,8 +13,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "AssignTest", urlPatterns = {"/AssignTest"})
-public class AssignTest extends HttpServlet {
+@WebServlet(name = "AddQuestions", urlPatterns = {"/AddQuestions"})
+public class AddQuestions extends HttpServlet {
     private DataSource datasource = null;
     public static HttpSession session;
     private student user1;

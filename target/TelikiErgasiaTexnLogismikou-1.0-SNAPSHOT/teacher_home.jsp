@@ -33,7 +33,7 @@
 <form method="post" action="MyServlet">
   <input type="submit" value="Assigned Tests">
 </form>
-<form action="AssignTests.jsp">
+<form action="AddQuestion.jsp">
     <input type="submit" value="Create new exercises">
 </form>
 <form>

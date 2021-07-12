@@ -29,7 +29,7 @@
 
 %>
 <h1>  <%= ((teacher) request.getSession(false).getAttribute("usr_obj")).getUsername() %>, assign new questions</h1>
-<form method="post" action="AssignTest">
+<form method="post" action="AddQuestions">
 
         <br>
         <br>
@@ -38,9 +38,10 @@
     Multiple choice <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="multichoice"> Fill the blank <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="filltheblank">True or false <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="trueorfalse"><br>
     <div id="mc" style="display:none">
         <b>question:</b>
-        First question<input type="text"  name="first_quest"/>
-        Second question<input type="text" name="second_quest"/>
-        Third question<input type="text"  name="third_quest" required=""/>
+        Question<input type="text"  name="question"/>
+        Choice 1<input type="text" name="choice1"/>
+        Choice 2 correct<input type="text"  name="choice_correct" style="border: 2px solid green;"/>
+        Choice 3    <input type="text"  name="choice2" />
     </div>
     <div id="ftb" style="display: none">
         Fill the blank<input type="text" id="fillblank" name="filltheblank">
