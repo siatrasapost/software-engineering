@@ -28,13 +28,22 @@
     }
 
 %>
-    <h1>Hello Student</h1>
+    <div class="header">
+        <span class="logo">Home - Student</span>
+        <div class="header-left">
+            <a class="home" href="./student_home.jsp">Home</a>
+        </div>
+        <div class="header-right">
+            <a class="logout" href="./logout.jsp">Logout</a>
+        </div>
+    </div>
+    <h3>Hello Student!</h3>
     <br>
     <form method="post" action="MyServlet">
         <input type="submit" value="Assigned Tests">
     </form>
-    <input type="button" value="Previous Tests">
-    <br>
-    <a href="logout.jsp">Logout</a>
+    <form method="get" action="MyServlet">
+        <input type="submit" value="Previous Tests">
+    </form>
 </body>
 </html>

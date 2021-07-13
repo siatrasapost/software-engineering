@@ -44,6 +44,7 @@
     <table class="center">
         <tr>
             <th scope="col">Teacher</th>
+            <th scope="col">Student's username</th>
             <th scope="col">Questions</th>
             <th scope="col">Difficulty</th>
             <th scope="col">Date Assigned</th>
@@ -53,6 +54,7 @@
             for (int i=0; i<(int) request.getAttribute("assigned_num"); i++){
                 out.println("<tr>");
                 out.println("<td>"+((List<String>)request.getAttribute("teachers")).get(i)+"</td>");
+                out.println("<td>"+((List<String>)request.getAttribute("fullnames")).get(i)+"</td>");
                 out.println("<td>"+((List<Integer>)request.getAttribute("questions_num")).get(i)+"</td>");
                 out.println("<td>"+((List<Integer>)request.getAttribute("difficulty")).get(i)+"</td>");
                 out.println("<td>"+((List<Timestamp>)request.getAttribute("dates")).get(i)+"</td>");

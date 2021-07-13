@@ -145,8 +145,6 @@ public class AssignTests extends HttpServlet {
                     }
                 }
 
-
-
                 st = con.prepareStatement((((teacher)request.getSession(false).getAttribute("usr_obj"))
                         .getStatement("assign_test")));
                 st.setString(1, selected.get(i));
@@ -158,7 +156,7 @@ public class AssignTests extends HttpServlet {
 
                 st.executeUpdate();
 
-                //System.gc();
+                System.gc();
             }
 
             st.close();

@@ -95,6 +95,7 @@ public class MyServlet extends HttpServlet {
                 List<Integer> test_id = new ArrayList<>();
                 List<String> teacher_arr = new ArrayList<>();
                 List<Integer> questions_num = new ArrayList<>();
+                List<String> students_full = new ArrayList<>();
                 int assigned_num = 0;
                 List<Integer> difficulty = new ArrayList<>();
                 List<Timestamp> timestamps = new ArrayList<>();
@@ -102,6 +103,7 @@ public class MyServlet extends HttpServlet {
                 while (rs2.next()) {
                     test_id.add(rs2.getInt("test_id"));
                     teacher_arr.add(rs2.getString("teachersname"));
+                    students_full.add(rs2.getString("username"));
                     timestamps.add(rs2.getTimestamp("date"));
                     difficulty.add(rs2.getInt("difficulty"));
                     questions_num.add(rs2.getString("questions").split(",").length);
@@ -112,6 +114,7 @@ public class MyServlet extends HttpServlet {
 
                 request.setAttribute("assigned_num", assigned_num);
                 request.setAttribute("teachers", teacher_arr);
+                request.setAttribute("fullnames", students_full);
                 request.setAttribute("dates", timestamps);
                 request.setAttribute("questions_num", questions_num);
                 request.setAttribute("difficulty", difficulty);
