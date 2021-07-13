@@ -133,7 +133,6 @@ public class AssignTests extends HttpServlet {
 
                 rs.close();
                 st1.close();
-                con1.close();
 
                 Random random = new Random();
 
@@ -164,6 +163,7 @@ public class AssignTests extends HttpServlet {
 
             st.close();
             con.close();
+            con1.close();
 
             request.getRequestDispatcher("/teacher_home.jsp").forward(request, response);
 
@@ -183,4 +183,8 @@ public class AssignTests extends HttpServlet {
         out.println("</body>");
         out.println("</html>");
     }
+
+
+    //What if επιλεχθουν 10 εργασιες τυπου 1 αλλα υπαρχουν μολις 5 στην βαση
+    //Πρεπει να πεταει καποιο μηνυμα ωστε να μην συνεχιζει ο καθηγητης να φτιαχνει το τεστ!!!!!!
 }
