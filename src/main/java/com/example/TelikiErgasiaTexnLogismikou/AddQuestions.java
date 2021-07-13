@@ -49,6 +49,7 @@ public class AddQuestions extends HttpServlet {
         try {
             Connection con = datasource.getConnection();
             PreparedStatement st = con.prepareStatement("INSERT INTO questions(question,answer,difficulty,teachersname,type) VALUES (?, ?, ?, ?,?)");
+            System.out.println(request.getParameter("myField"));
             if(request.getParameter("myField").equals("multichoice")) {
                 st.setString(1, request.getParameter("question1")+","+request.getParameter("choice1")+","+request.getParameter("choice_correct")+","+request.getParameter("choice2"));
                 st.setString(2, request.getParameter("choice_correct"));
@@ -64,6 +65,7 @@ public class AddQuestions extends HttpServlet {
                 st.setInt(5,2);
             }
             else if(request.getParameter("myField").equals("trueorfalse")) {
+                System.out.println(request.getParameter("question3")+"  "+ request.getParameter("first_item")+"  "+request.getParameter("questdif") );
                 st.setString(1, request.getParameter("question3"));
                 st.setString(2, request.getParameter("first_item"));
                 st.setString(3, request.getParameter("questdif"));
@@ -81,10 +83,12 @@ public class AddQuestions extends HttpServlet {
             j=0;
         } catch (SQLException sqle) {
             sqle.printStackTrace();
+        }catch(Exception e) {
+            out.println("<script>");
+            out.println("alert('You have to login in order to access this page!');");
+            out.println("location.replace('./index.jsp');");
+            out.println("</script>");
         }
-
-
-
         out.println("</body>");
         out.println("</html>");
     }
