@@ -16,6 +16,8 @@ public class teacher extends user {
                 return "SELECT username, firstname, lastname, age FROM users WHERE typeacc = '1' AND age = ?";
             case "assign_test":
                 return "INSERT INTO test_history(username, grade, date, teachersname, questions, difficulty) VALUES (?,?,?,?,?,?)";
+            case "delete_test":
+                return "DELETE FROM test_history WHERE test_id= ? ";
             default:
                 return "";
         }

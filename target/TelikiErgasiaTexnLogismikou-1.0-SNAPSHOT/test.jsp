@@ -11,7 +11,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Test</title>
+    <title>Test - Student</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -30,6 +30,7 @@
 
     %>
     <h1>Test</h1>
+    <h3>Please fill out the test before submitting it!</h3>
     <form method="post" action="test">
         <%
             int j=0;

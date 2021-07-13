@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Add Questions - Teacher</title>
+    <title>Title</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -29,45 +29,32 @@
 
 %>
 <h1>  <%= ((teacher) request.getSession(false).getAttribute("usr_obj")).getUsername() %>, assign new questions</h1>
-<h3>Please select the difficulty and the preferred type of the question, then type the Question and the answers.</h3>
 <form method="post" action="AddQuestions">
+    <input type="hidden" name="myField" id="myField" />
         <br>
         <br>
-    <b>Question difficulty: </b>
-    <select name="questdif">
-        <option value="1" selected>1</option>
-        <option>2</option>
-        <option>3</option>
-    </select><br><br></tr>
-    <b>Type of question: </b>
-    <label for="multichoice">Multiple choice</label>
-    <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="multichoice" value="multichoice">
-    <label for="filltheblank">Fill the blank</label>
-    <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="filltheblank" value="filltheblank">
-    <label for="trueorfalse">True or false</label>
-    <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="trueorfalse" value="trueorfalse" required>
-    <br>
-    <br>
-    <br>
+        <br>
+        <br>
+    Question difficulty<select name="questdif">
+    <option value="1" selected>1</option>
+    <option>2</option>
+    <option>3</option>
+</select><br><br></tr>
+    Multiple choice <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="multichoice"> Fill the blank <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="filltheblank">True or false <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="trueorfalse"><br>
     <div id="mc" style="display:none">
-        <b>Question: </b><input type="text" id="idname1"  name="question1">
-        <b>Choice 1: </b><input type="text" id="idname2" name="choice1">
-        <b>Choice 2 (<u>correct</u>): </b><input type="text" id="idname3" name="choice_correct" style="border: 2px solid green;">
-        <b>Choice 3: </b><input type="text" id="idname4" name="choice2" >
+        <b>question:</b>
+        Question<input type="text"  name="question"/>
+        Choice 1<input type="text" name="choice1"/>
+        Choice 2 correct<input type="text"  name="choice_correct" style="border: 2px solid green;"/>
+        Choice 3    <input type="text"  name="choice2" />
     </div>
     <div id="ftb" style="display: none">
-        (Example) Question : Athens is the ________ of greece.        Anwser: capital
-        <br>
-        <b>Question: </b><input type="text" id="idname5" name="question2">
-        <b>Anwser: </b><input type="text" id="idname6" name="anwser">
+        Fill the blank<input type="text" id="fillblank" name="filltheblank">
     </div>
     <div id="trf" style="display:none">
-        <b>Question: </b><input id="idname7" type="text"  name="question3">
-        <b>Answer: </b>
-        <label for="True">True</label>
-        <input type="radio" id="True" value="true"   name="first_item">
-        <label for="False">False</label>
-        <input type="radio" id="False" value="false" name="first_item">
+        question<input type="text name=trueorfalse">
+        True<input type="radio" id="True"    name="first_item"/>
+        False<input type="radio" id="False"  name="first_item" />
     </div>
     <br>
     <input type="submit" value="Assign new question">
@@ -79,40 +66,19 @@
             document.getElementById('mc').style.display = 'block';
             document.getElementById('ftb').style.display = 'none';
             document.getElementById('trf').style.display = 'none';
-            document.getElementById("idname1").required = true;
-            document.getElementById("idname2").required = true;
-            document.getElementById("idname3").required = true;
-            document.getElementById("idname4").required = true;
-            document.getElementById("idname5").required = false;
-            document.getElementById("idname6").required = false;
-            document.getElementById('False').required = false;
-            document.getElementById('idname7').required = false;
+            document.getElementById('myField').value ="multichoice";
         }
         else if(document.getElementById('filltheblank').checked) {
             document.getElementById('mc').style.display = 'none';
             document.getElementById('ftb').style.display = 'block';
             document.getElementById('trf').style.display = 'none';
-            document.getElementById("idname1").required = false;
-            document.getElementById("idname2").required = false;
-            document.getElementById("idname3").required = false;
-            document.getElementById("idname4").required = false;
-            document.getElementById("idname5").required = true;
-            document.getElementById("idname6").required = true;
-            document.getElementById('False').required = false;
-            document.getElementById('idname7').required = false;
+            document.getElementById('myField').value ='filltheblank';
         }
         else if(document.getElementById('trueorfalse').checked){
             document.getElementById('mc').style.display = 'none';
             document.getElementById('ftb').style.display = 'none';
             document.getElementById('trf').style.display = 'block';
-            document.getElementById('False').required = true;
-            document.getElementById("idname1").required = false;
-            document.getElementById("idname2").required = false;
-            document.getElementById("idname3").required = false;
-            document.getElementById("idname4").required = false;
-            document.getElementById("idname5").required = false;
-            document.getElementById("idname6").required = false;
-            document.getElementById('idname7').required = true;
+            document.getElementById('myField').value ='trueorfalse';
         }
     }
 

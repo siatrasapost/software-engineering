@@ -32,7 +32,7 @@
 %>
 <h1>Welcome, <%= ((teacher) request.getSession(false).getAttribute("usr_obj")).getUsername() %></h1>
 <h3>Here you can see the tests you have assigned to your students!</h3>
-<form action="">
+<form method="post" action="Question_Delete">
     <table class="center">
         <tr>
             <th scope="col">Teacher</th>
@@ -56,7 +56,7 @@
         %>
     </table>
     <br>
-    <input type="button" value="Delete Test" <%= (int)request.getAttribute("assigned_num")==0? "hidden" : ""%>>
+    <input type="submit" value="Delete Test" <%= (int)request.getAttribute("assigned_num")==0? "hidden" : ""%>>
 </form>
 <br>
 <a href="logout.jsp">Log Out</a>

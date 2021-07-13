@@ -133,7 +133,6 @@ public class AssignTests extends HttpServlet {
 
                 rs.close();
                 st1.close();
-                con1.close();
 
                 Random random = new Random();
 
@@ -159,12 +158,13 @@ public class AssignTests extends HttpServlet {
 
                 st.executeUpdate();
 
-                System.gc();
+                //System.gc();
             }
 
             st.close();
             con.close();
 
+            con1.close();
             request.getRequestDispatcher("/teacher_home.jsp").forward(request, response);
 
         } catch (SQLException e){
