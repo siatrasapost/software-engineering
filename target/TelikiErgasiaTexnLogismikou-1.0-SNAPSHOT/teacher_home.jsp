@@ -28,7 +28,16 @@
   }
 
 %>
-<h1>Hello Teacher</h1>
+<div class="header">
+    <span class="logo">Home - Teacher</span>
+    <div class="header-left">
+        <a class="home" href="./teacher_home.jsp">Home</a>
+    </div>
+    <div class="header-right">
+        <a class="logout" href="./logout.jsp">Logout</a>
+    </div>
+</div>
+<h3>Hello Teacher!</h3>
 <br>
 <form method="post" action="MyServlet">
   <input type="submit" value="Assigned Tests">
@@ -39,7 +48,5 @@
 <form action="prepare_test.jsp">
     <input type="submit" value="Assign tests to students">
 </form>
-<br>
-<a href="logout.jsp">Logout</a>
 </body>
 </html>

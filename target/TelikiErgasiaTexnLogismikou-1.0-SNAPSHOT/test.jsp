@@ -29,7 +29,15 @@
         }
 
     %>
-    <h1>Test</h1>
+    <div class="header">
+        <span class="logo">Test</span>
+        <div class="header-left">
+            <a class="home" href="./student_home.jsp">Home</a>
+        </div>
+        <div class="header-right">
+            <a class="logout" href="./logout.jsp">Logout</a>
+        </div>
+    </div>
     <h3>Please fill out the test before submitting it!</h3>
     <form method="post" action="test">
         <%

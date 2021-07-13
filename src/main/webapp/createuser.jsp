@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="UTF-8">
     <title>Create an account</title>
 </head>
@@ -47,29 +48,27 @@
         <tr><td>
             Type of account<td><select onchange="visible()" id="typeacc" required name="typeacc">
             <option value="1" selected>Student</option>
-            <option value="2">Teacher</option>
+            <option  value="2">Teacher</option>
         </select><br><br></tr>
-            <td id="hiddentext" class="hiddentext" style="visibility: hidden">6ψηφιος κωδικος:</td>
-            <td><input id="hiddeninput" style="visibility: hidden" type="text"   name="code" /></td>
-        <td></td>
-
-        <td><input type="submit" onsubmit="required()" value="Create User!" /></td>
+            <td id="hiddentext" class="hiddentext" >6ψηφιος κωδικος:</td>
+            <td><input id="hiddeninput"  type="text" minlength="6" maxlength="6" disabled name="code" /></td>
+        </tr>
         <br/>
     </table>
+    <br>
+    <input type="submit" onsubmit="required()" value="Create User!" />
 </form>
 <script>
     function visible() {
         var e = document.getElementById("typeacc");
         var strUser = e.value;
         if (strUser == "2") {
-            document.getElementById("hiddeninput").style.visibility = "visible";
-            document.getElementById("hiddentext").style.visibility = "visible";
             document.getElementById("hiddeninput").required=true;
+            document.getElementById("hiddeninput").disabled = false;
         }
         else if(strUser=="1"){
-            document.getElementById("hiddeninput").style.visibility = "hidden";
-            document.getElementById("hiddentext").style.visibility = "hidden";
             document.getElementById("hiddeninput").required=false;
+            document.getElementById("hiddeninput").disabled = true;
         }
     }
 </script>
