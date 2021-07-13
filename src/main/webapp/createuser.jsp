@@ -9,12 +9,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create an account</title>
 </head>
 <style>
     body {background-color: #e6e6e6;}
 </style>
 <body>
+<h1>Create an account</h1>
 <form method="post" action="InsertNewStudent">
     <input type="hidden" name="requestType" value="Insert" />
     <table align="center"style="margin: 0px auto;">

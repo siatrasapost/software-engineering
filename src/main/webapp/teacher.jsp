@@ -10,7 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>TEACHER</title>
+    <title>Assigned tests - Teacher</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -30,7 +30,15 @@
     }
 
 %>
-<h1>Welcome, <%= ((teacher) request.getSession(false).getAttribute("usr_obj")).getUsername() %></h1>
+<div class="header">
+    <span class="logo">Assigned Tests</span>
+    <div class="header-left">
+        <a class="home" href="./teacher_home.jsp">Home</a>
+    </div>
+    <div class="header-right">
+        <a class="logout" href="./logout.jsp">Logout</a>
+    </div>
+</div>
 <h3>Here you can see the tests you have assigned to your students!</h3>
 <form method="post" action="Question_Delete">
     <table class="center">
@@ -58,8 +66,5 @@
     <br>
     <input type="submit" value="Delete Test" <%= (int)request.getAttribute("assigned_num")==0? "hidden" : ""%>>
 </form>
-<br>
-<a href="logout.jsp">Log Out</a>
-
 </body>
 </html>

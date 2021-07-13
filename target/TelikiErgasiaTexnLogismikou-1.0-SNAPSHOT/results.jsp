@@ -28,7 +28,15 @@
     }
 
 %>
-    <h1>Results</h1>
+    <div class="header">
+        <span class="logo">Results</span>
+        <div class="header-left">
+            <a class="home" href="./student_home.jsp">Home</a>
+        </div>
+        <div class="header-right">
+            <a class="logout" href="./logout.jsp">Logout</a>
+        </div>
+    </div>
     <h3><%= ((student)session.getAttribute("usr_obj")).getUsername()%>, here is your final results and your grade:</h3>
     <br>
     <div>
@@ -45,8 +53,5 @@
     <br>
     <p><strong>Your final grade is : <%= request.getAttribute("grade")%> / 10 </strong></p>
     <br>
-    <form method="post" action="MyServlet">
-        <input type="submit" value="Home">
-    </form>
 </body>
 </html>

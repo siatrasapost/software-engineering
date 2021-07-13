@@ -33,7 +33,6 @@ public class MyServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-        int j=0;
         PrintWriter out = response.getWriter();
 
         response.setContentType("text/html; charset=UTF-8");
@@ -147,7 +146,70 @@ public class MyServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
 
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<style>");
+        out.println("<body {background-color: #e6e6e6;}>");
+        out.println("</style>");
+
+        try {
+            Connection con = datasource.getConnection();
+
+            PreparedStatement ps = con.prepareStatement(((student)request.getSession(false).getAttribute("usr_obj")).getStatement("previous_tests"));
+            ps.setString(1, ((student)request.getSession(false).getAttribute("usr_obj")).getUsername());
+
+            ResultSet rs = ps.executeQuery();
+
+            List<String> grade = new ArrayList<>();
+            List<String> teacher_arr = new ArrayList<>();
+            List<Integer> questions_num = new ArrayList<>();
+            int assigned_num = 0;
+            List<Integer> difficulty = new ArrayList<>();
+            List<Timestamp> timestamps = new ArrayList<>();
+
+            while (rs.next()) {
+                teacher_arr.add(rs.getString("teachersname"));
+                grade.add(rs.getString("grade"));
+                timestamps.add(rs.getTimestamp("date"));
+                difficulty.add(rs.getInt("difficulty"));
+                questions_num.add(rs.getString("questions").split(",").length);
+                assigned_num++;
+            }
+
+            rs.close();
+            con.close();
+
+            request.setAttribute("assigned_num", assigned_num);
+            request.setAttribute("teachers", teacher_arr);
+            request.setAttribute("dates", timestamps);
+            request.setAttribute("questions_num", questions_num);
+            request.setAttribute("difficulty", difficulty);
+            request.setAttribute("grades", grade);
+
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+            response.addHeader("Cache-Control", "post-check=0, pre-check=0");
+            //Directs caches not to store the page under any circumstance
+            response.setDateHeader("Expires", 0);
+            //Causes the proxy cache to see the page as "stale"
+            response.setHeader("Pragma", "no-cache");
+
+            request.getRequestDispatcher("/previous.jsp").forward(request, response);
+
+        } catch (SQLException e){
+            out.println("Database connection problem\n");
+            out.println(e.toString());
+        }
+        catch(Exception e) {
+            out.println("<script>");
+            out.println("alert('You have to login in order to access this page!');");
+            out.println("location.replace('./index.jsp');");
+            out.println("</script>");
+        }
     }
 }

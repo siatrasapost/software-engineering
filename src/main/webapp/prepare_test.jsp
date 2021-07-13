@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Preparing test assignment- Teacher</title>
+    <title>Preparing test assignment - Teacher</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -28,7 +28,15 @@
     }
 
 %>
-    <h1>Preparing Test Assignment</h1>
+    <div class="header">
+        <span class="logo">Preparing Test Assignment</span>
+        <div class="header-left">
+            <a class="home" href="./teacher_home.jsp">Home</a>
+        </div>
+        <div class="header-right">
+            <a class="logout" href="./logout.jsp">Logout</a>
+        </div>
+    </div>
     <h3>Please select the required features in order to assign a test to your students.</h3>
     <form method="get" action="AssignTests">
         <br>

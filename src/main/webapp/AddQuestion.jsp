@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Add question - Teacher</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -28,7 +28,15 @@
     }
 
 %>
-<h1>  <%= ((teacher) request.getSession(false).getAttribute("usr_obj")).getUsername() %>, assign new questions</h1>
+<div class="header">
+    <span class="logo"><%= ((teacher) request.getSession(false).getAttribute("usr_obj")).getUsername() %>, assign new questions</span>
+    <div class="header-left">
+        <a class="home" href="./teacher_home.jsp">Home</a>
+    </div>
+    <div class="header-right">
+        <a class="logout" href="./logout.jsp">Logout</a>
+    </div>
+</div>
 <form method="post" action="AddQuestions">
     <input type="hidden" name="myField" id="myField" />
         <br>

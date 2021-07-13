@@ -12,7 +12,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <title>STUDENT</title>
+    <title>Select test - Student</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -32,7 +32,15 @@
     }
 
 %>
-<h1>Welcome, <%= ((student) request.getSession(false).getAttribute("usr_obj")).getUsername() %></h1>
+<div class="header">
+    <span class="logo">Select Test</span>
+    <div class="header-left">
+        <a class="home" href="./student_home.jsp">Home</a>
+    </div>
+    <div class="header-right">
+        <a class="logout" href="./logout.jsp">Logout</a>
+    </div>
+</div>
 <h3>Please select one of the tests your teacher has assigned to you, in order to solve it!</h3>
 <form action="test">
     <table class="center">
@@ -61,7 +69,5 @@
     <br>
     <input type="submit" value="Start test" <%= (int)request.getAttribute("assigned_num")==0? "hidden" : ""%>>
 </form>
-<br>
-<a href="logout.jsp">Log Out</a>
 </body>
 </html>
