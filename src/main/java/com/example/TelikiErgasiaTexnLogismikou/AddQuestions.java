@@ -83,9 +83,12 @@ public class AddQuestions extends HttpServlet {
             j=0;
         } catch (SQLException sqle) {
             sqle.printStackTrace();
+        }catch(Exception e) {
+            out.println("<script>");
+            out.println("alert('You have to login in order to access this page!');");
+            out.println("location.replace('./index.jsp');");
+            out.println("</script>");
         }
-
-
         out.println("</body>");
         out.println("</html>");
     }
