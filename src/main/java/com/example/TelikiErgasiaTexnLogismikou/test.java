@@ -62,6 +62,8 @@ public class test extends HttpServlet {
             quest.clear();
             ans.clear();
 
+            List<Integer> types = new ArrayList<>();
+
             while (rs.next()){
                 question_id = rs.getString("questions").split(",");
             }
@@ -74,6 +76,7 @@ public class test extends HttpServlet {
                     answer = rs.getString("answer");
                     quest.add(question);
                     ans.add(answer);
+                    types.add(rs.getInt("type"));
                 }
             }
 
@@ -81,6 +84,7 @@ public class test extends HttpServlet {
             //request.setAttribute("test_type", request.getParameter("tests"));
             request.setAttribute("questions", quest);
             request.setAttribute("answers", ans);
+            request.setAttribute("types", types);
             request.setAttribute("test_id", request.getParameter("selected"));
 
             request.getRequestDispatcher("/test.jsp").forward(request, response);
@@ -116,15 +120,10 @@ public class test extends HttpServlet {
 
         for (int i=0;i<quest.size();i++){
             useranswer.add(request.getParameter("textbox"+i));
-            //System.out.println(useranswer);
         }
 
         for (int j=0;j<ans.size();j++){
             if(!ans.get(j).equalsIgnoreCase(useranswer.get(j))){
-                //System.out.println(ans.get(j) + " " + useranswer.get(j));
-//                out.println("<script>");
-//                out.println("alert(\"H erwthsh <"+quest.get(j)+"> einai lan8asmenh\");");
-//                out.println("</script>");
                 wrongs++;
             }
         }
@@ -160,6 +159,7 @@ public class test extends HttpServlet {
             out.println("alert('You have to login in order to access this page!');");
             out.println("location.replace('./index.jsp');");
             out.println("</script>");
+
         }
 
         out.println("</body>");

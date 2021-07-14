@@ -116,20 +116,26 @@ public class AssignTests extends HttpServlet {
             for (int i = 0; i < selected.size(); i++) {
                 PreparedStatement st1 = con1.prepareStatement("SELECT question_id FROM questions WHERE difficulty = ? AND type = ?");
                 st1.setString(1, request.getParameter("difficulty"));
-                switch (request.getParameter("quest_type")){
+                switch ((String) request.getParameter("quest_type")){
                     case "multichoice":
                         st1.setInt(2, 1);
+                        break;
                     case "filltheblank":
                         st1.setInt(2, 2);
+                        break;
                     case "trueorfalse":
                         st1.setInt(2, 3);
+                        break;
                 }
+                System.out.println("Quest_type "+request.getParameter("quest_type"));
                 ResultSet rs = st1.executeQuery();
 
                 List<Integer> ids = new ArrayList<>();
                 while (rs.next()){
                     ids.add(rs.getInt("question_id"));
                 }
+
+                System.out.println(ids);
 
                 rs.close();
                 st1.close();

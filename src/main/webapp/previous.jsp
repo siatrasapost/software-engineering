@@ -57,7 +57,7 @@
             out.println("</tr>");
         }
 
-        out.println((int)request.getAttribute("assigned_num")==0? "<tr><td colspan=\"5\">NO TESTS ASSIGNED</td></tr>" : "");
+        out.println((int)request.getAttribute("assigned_num")==0? "<tr><td colspan=\"5\">NO TESTS SUBMITTED</td></tr>" : "");
     %>
 </table>
 </body>

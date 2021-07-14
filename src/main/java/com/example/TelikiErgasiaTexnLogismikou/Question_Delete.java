@@ -36,7 +36,6 @@ public class Question_Delete extends HttpServlet {
         try {
             Connection con = datasource.getConnection();
             PreparedStatement st = con.prepareStatement(((teacher) request.getSession(false).getAttribute("usr_obj")).getStatement("delete_test"));
-            System.out.println(request.getParameter("selected"));
             st.setInt(1, Integer.parseInt(request.getParameter("selected")));
             st.executeUpdate();
             st.close();

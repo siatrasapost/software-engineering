@@ -1,5 +1,4 @@
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.*" %>
 <%--
   Created by IntelliJ IDEA.
   User: siatr
@@ -44,9 +43,28 @@
             int j=0;
             for (String s : (List<String>)request.getAttribute("questions")
                  ) {
-                out.println("<p>"+(j+1)+". "+s+"</p>");
+                out.println("<p>"+(j+1)+". "+s.split(",")[0]+"</p>");
                 out.println("<label>");
-                out.println("<input type=\"text\" id=\"textbox"+j+"\" name=\"textbox"+j+"\" placeholder=\"Type your answer...\" size=\"30\" required>");
+                switch (((List<Integer>)request.getAttribute("types")).get(j)){
+                    case 1:
+                        List<String> multiple = Arrays.asList(s.split(","));
+                        Collection<String> c = new ArrayList(multiple);
+                        c.remove(new String(multiple.get(0)));
+
+                        Collections.shuffle((List<String>) c);
+
+                        out.println("<input type=\"radio\" id=\"radio"+j+"1\" name=\"textbox"+j+"\" value=\""+ ((ArrayList<String>) c).get(0) +"\">"+ ((ArrayList<String>) c).get(0));
+                        out.println("<input type=\"radio\" id=\"radio"+j+"2\" name=\"textbox"+j+"\" value=\""+ ((ArrayList<String>) c).get(1) +"\">"+ ((ArrayList<String>) c).get(1));
+                        out.println("<input type=\"radio\" id=\"radio"+j+"3\" name=\"textbox"+j+"\" value=\""+ ((ArrayList<String>) c).get(2) +"\">"+ ((ArrayList<String>) c).get(2));
+                        break;
+                    case 2:
+                        out.println("<input type=\"text\" id=\"textbox"+j+"\" name=\"textbox"+j+"\" placeholder=\"Type your answer...\" size=\"30\" required>");
+                        break;
+                    case 3:
+                        out.println("<input type=\"radio\" id=\"radio"+j+"1\" name=\"textbox"+j+"\" value=\"true\"> True");
+                        out.println("<input type=\"radio\" id=\"radio"+j+"2\" name=\"textbox"+j+"\" value=\"false\"> False");
+                        break;
+                }
                 out.println("</label>");
 
                 j++;

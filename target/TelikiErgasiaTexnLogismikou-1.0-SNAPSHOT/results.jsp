@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.example.BasicClasses.student" %><%--
+<%@ page import="com.example.BasicClasses.student" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: siatr
   Date: 3/7/2021
@@ -42,7 +43,7 @@
     <div>
         <%
             for (int i=0;i<((ArrayList)request.getAttribute("questions")).size();i++){
-                out.println((i+1)+". <ins>"+((ArrayList)request.getAttribute("questions")).get(i)+"</ins>");
+                out.println((i+1)+". <ins>"+((List<String>)request.getAttribute("questions")).get(i).split(",")[0]+"</ins>");
                 out.println("<br>");
                 out.println("Your answer was: <span style=\"color:blue\">"+((ArrayList)request.getAttribute("user_choices")).get(i)
                         +"</span> <br>The right answer was: <b>"+((ArrayList)request.getAttribute("right_ones")).get(i)+"</b>");
