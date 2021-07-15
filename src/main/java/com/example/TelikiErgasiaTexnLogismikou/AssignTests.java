@@ -110,6 +110,8 @@ public class AssignTests extends HttpServlet {
             Connection con1 = datasource.getConnection();
 
             String[] values = request.getParameterValues("selected");
+            if (values == null)
+                throw new NullPointerException();
             List<String> selected = new ArrayList<>(Arrays.asList(values));
 
             PreparedStatement st = null;
@@ -127,7 +129,6 @@ public class AssignTests extends HttpServlet {
                         st1.setInt(2, 3);
                         break;
                 }
-                System.out.println("Quest_type "+request.getParameter("quest_type"));
                 ResultSet rs = st1.executeQuery();
 
                 List<Integer> ids = new ArrayList<>();
@@ -170,11 +171,21 @@ public class AssignTests extends HttpServlet {
             con1.close();
 
             con1.close();
-            request.getRequestDispatcher("/teacher_home.jsp").forward(request, response);
+
+            out.println("<script>");
+            out.println("alert('Test has been assigned succesfully!');");
+            out.println("location.replace('./teacher_home.jsp');");
+            out.println("</script>");
 
         } catch (SQLException e){
             out.println("Database connection problem\n");
             out.println(e.toString());
+        }
+        catch (NullPointerException e){
+            out.println("<script>");
+            out.println("alert('You have to select at least one student in order to assign a test! \\nPlease try again!');");
+            out.println("location.replace('./teacher_home.jsp');");
+            out.println("</script>");
         }
         catch(Exception e) {
             System.out.println(e.getLocalizedMessage());
@@ -188,8 +199,4 @@ public class AssignTests extends HttpServlet {
         out.println("</body>");
         out.println("</html>");
     }
-
-
-    //What if επιλεχθουν 10 εργασιες τυπου 1 αλλα υπαρχουν μολις 5 στην βαση
-    //Πρεπει να πεταει καποιο μηνυμα ωστε να μην συνεχιζει ο καθηγητης να φτιαχνει το τεστ!!!!!!
 }

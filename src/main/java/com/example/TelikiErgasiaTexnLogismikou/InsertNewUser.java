@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 
-@WebServlet(name = "InsertNewStudent",urlPatterns = "/InsertNewStudent")
-public class InsertNewStudent extends HttpServlet {
+@WebServlet(name = "InsertNewUser",urlPatterns = "/InsertNewUser")
+public class InsertNewUser extends HttpServlet {
     private DataSource datasource = null;
 
     public void init() throws ServletException{

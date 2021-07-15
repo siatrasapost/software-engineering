@@ -17,7 +17,7 @@
 </style>
 <body>
 <h1>Create an account</h1>
-<form method="post" action="InsertNewStudent">
+<form method="post" action="InsertNewUser">
     <input type="hidden" name="requestType" value="Insert" />
     <table align="center"style="margin: 0px auto;">
         <tr>
