@@ -18,6 +18,8 @@ public class teacher extends user {
                 return "INSERT INTO test_history(username, grade, date, teachersname, questions, difficulty) VALUES (?,?,?,?,?,?)";
             case "delete_test":
                 return "DELETE FROM test_history WHERE test_id= ? ";
+            case "get_recent_tests":
+                return "SELECT * FROM test_history WHERE grade!='' AND teachersname=? AND date<? AND date>?";
             default:
                 return "";
         }

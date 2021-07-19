@@ -43,7 +43,7 @@
         <th scope="col">Teacher</th>
         <th scope="col">Questions</th>
         <th scope="col">Difficulty</th>
-        <th scope="col">Date Assigned</th>
+        <th scope="col">Date Solved</th>
         <th scope="col">Grade</th>
     </tr>
     <%

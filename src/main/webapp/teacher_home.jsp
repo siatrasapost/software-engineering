@@ -48,5 +48,8 @@
 <form action="prepare_test.jsp">
     <input type="submit" value="Assign tests to students">
 </form>
+<form method="post" action="GetRecentResults">
+    <input type="submit" value="Recently solved tests">
+</form>
 </body>
 </html>

@@ -47,7 +47,8 @@
             <th scope="col">Student's username</th>
             <th scope="col">Questions</th>
             <th scope="col">Difficulty</th>
-            <th scope="col">Date Assigned</th>
+            <th scope="col">Date Assigned/Solved</th>
+            <th scope="col">Grade</th>
             <th scope="col">DELETE</th>
         </tr>
         <%
@@ -58,11 +59,12 @@
                 out.println("<td>"+((List<Integer>)request.getAttribute("questions_num")).get(i)+"</td>");
                 out.println("<td>"+((List<Integer>)request.getAttribute("difficulty")).get(i)+"</td>");
                 out.println("<td>"+((List<Timestamp>)request.getAttribute("dates")).get(i)+"</td>");
+                out.println("<td>"+((List<String>)request.getAttribute("grades")).get(i)+"</td>");
                 out.println("<th scope=\"row\"><input type=\"radio\" id=\"radio"+i+"\" name=\"selected\" value="+((List<Integer>)request.getAttribute("test_id")).get(i)+" required></td>");
                 out.println("</tr>");
             }
 
-            out.println((int)request.getAttribute("assigned_num")==0? "<tr><td colspan=\"6\">NO TESTS ASSIGNED</td></tr>" : "");
+            out.println((int)request.getAttribute("assigned_num")==0? "<tr><td colspan=\"7\">NO TESTS ASSIGNED</td></tr>" : "");
         %>
     </table>
     <br>

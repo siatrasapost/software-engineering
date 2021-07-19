@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @WebServlet(name = "MyServlet",urlPatterns = {"/MyServlet"})
@@ -99,6 +100,7 @@ public class MyServlet extends HttpServlet {
                 int assigned_num = 0;
                 List<Integer> difficulty = new ArrayList<>();
                 List<Timestamp> timestamps = new ArrayList<>();
+                List<String> grades = new ArrayList<>();
 
                 while (rs2.next()) {
                     test_id.add(rs2.getInt("test_id"));
@@ -107,6 +109,7 @@ public class MyServlet extends HttpServlet {
                     timestamps.add(rs2.getTimestamp("date"));
                     difficulty.add(rs2.getInt("difficulty"));
                     questions_num.add(rs2.getString("questions").split(",").length);
+                    grades.add(rs2.getString("grade"));
                     assigned_num++;
                 }
 
@@ -119,6 +122,7 @@ public class MyServlet extends HttpServlet {
                 request.setAttribute("questions_num", questions_num);
                 request.setAttribute("difficulty", difficulty);
                 request.setAttribute("test_id", test_id);
+                request.setAttribute("grades", grades);
 
                 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
                 response.addHeader("Cache-Control", "post-check=0, pre-check=0");
