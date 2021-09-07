@@ -51,5 +51,12 @@
 <form method="post" action="GetRecentResults">
     <input type="submit" value="Recently solved tests">
 </form>
+<div>
+    <table align="center">
+        <tr>
+            <td colspan="2" style="ext-align:center"><a href="./soft_eng.pdf">Βοήθεια</a></td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

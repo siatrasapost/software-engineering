@@ -45,5 +45,13 @@
     <form method="get" action="MyServlet">
         <input type="submit" value="Previous Tests">
     </form>
+    <br>
+    <div>
+        <table align="center">
+            <tr>
+                <td colspan="2" style="ext-align:center"><a href="./soft_eng.pdf">Βοήθεια</a></td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>

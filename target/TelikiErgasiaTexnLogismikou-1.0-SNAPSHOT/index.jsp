@@ -41,6 +41,9 @@
         <tr>
             <td colspan="2" style="text-align:center"><a href="createuser.jsp">Εισαγωγη νεου χρηστη</a></td>
         </tr>
+        <tr>
+            <td colspan="2" style="ext-align:center"><a href="./soft_eng.pdf">Βοήθεια</a></td>
+        </tr>
     </table>
 </div>
 </body>
